@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {t} from '../../i18n.js';
+import {t} from '../i18n.js';
 import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
 
 export class Navbar extends LitElement {

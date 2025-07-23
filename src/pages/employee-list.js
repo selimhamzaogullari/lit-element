@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
-import {t} from '../../i18n.js';
-import {useEmployeeStore} from '../../store.js';
+import {t} from '../i18n.js';
+import {useEmployeeStore} from '../store.js';
 import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
 
 export class EmployeeList extends LitElement {
@@ -65,7 +65,8 @@ export class EmployeeList extends LitElement {
   }
 
   renderTableUI() {
-    return html`<table class="mt-16">
+    return html`<div class="table">
+      <table class="mt-16">
       <thead>
         <tr>
           <th scope="col">${t('firstName')}</th>
@@ -113,7 +114,9 @@ export class EmployeeList extends LitElement {
           </tr>`
         )}
       </tbody>
-    </table>`;
+    </table>
+
+    </div>`;
   }
 
   renderGridUI() {
@@ -231,10 +234,13 @@ export class EmployeeList extends LitElement {
   static styles = [
     sharedStyles,
     css`
+      .table {
+        overflow-x: auto;
+      }
       table {
         margin: 0;
         padding: 0;
-        width: 100%;
+        min-width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
         background-color: var(--color-white);
@@ -250,55 +256,13 @@ export class EmployeeList extends LitElement {
       table td {
         padding: 1.5rem;
         text-align: center;
-        text-overflow: ellipsis;
-        overflow: hidden;
+        white-space: nowrap;
       }
 
       table th {
         color: var(--color-main);
       }
 
-      @media screen and (max-width: 1200px) {
-        // table
-        table {
-          background-color: transparent;
-        }
-
-        table thead {
-          border: none;
-          clip: rect(0 0 0 0);
-          height: 1px;
-          margin: -1px;
-          overflow: hidden;
-          padding: 0;
-          position: absolute;
-          width: 1px;
-        }
-
-        table tr {
-          background-color: var(--color-white);
-          border-bottom: 2px solid var(--color-border);
-          display: block;
-          margin-bottom: 2em;
-        }
-
-        table td {
-          border-bottom: 2px solid var(--color-border);
-          display: block;
-          padding: 0.75rem;
-          text-align: right;
-        }
-
-        table td::before {
-          content: attr(data-label);
-          float: left;
-          font-weight: var(--font-bold);
-        }
-
-        table td:last-child {
-          border-bottom: 0;
-        }
-      }
       .pagination img {
         margin-top: 0.125rem;
       }
