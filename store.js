@@ -1,8 +1,8 @@
-import {create} from 'zustand';
+import {createStore} from 'zustand/vanilla';
 import {persist, createJSONStorage} from 'zustand/middleware';
-import mockData from './mockData';
+import {mockData} from './mockData';
 
-export const useEmployeeStore = create()(
+export const useEmployeeStore = createStore()(
   persist(
     (set, get) => ({
       employees: mockData,

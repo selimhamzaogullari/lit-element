@@ -9,18 +9,13 @@
     <link rel="stylesheet" href="./src/styles/global.css" />
     <link rel="stylesheet" href="./src/styles/superclasses.css" />
     <script type="module" src="./src/components/navbar-content.js"></script>
+    <script type="module" src="./src/components/employee-list.js"></script>
   </head>
   <body>
     <div id="outlet">
       <navbar-content></navbar-content>
       <div class="container">
-        <div class="d-flex item-center justify-between mt-16">
-          <span class="main-color text-3xl font-semibold">Employee List</span>
-          <div>
-            <img src="./src/assets/icons/table-icon.svg" title="table-icon" />
-            <img src="./src/assets/icons/grid-icon.svg" title="grid-icon" />
-          </div>
-        </div>
+        <employee-list></employee-list>
       </div>
     </div>
   </body>
