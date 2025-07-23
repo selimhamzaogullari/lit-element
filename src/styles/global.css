@@ -5,7 +5,7 @@
 :root {
   --color-bg: #f8f8f8;
   --color-main: #ff6200;
-  --color-text: #575a5f;
+  --color-text: #353535;
   --color-text-secondary: #c2c2c2;
   --color-border: #efefef;
   --color-white: #ffffff;
@@ -24,6 +24,11 @@
   --spacing-8: 0.5rem;
   --spacing-12: 0.75rem;
   --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
 
   --rounded-sm: 0.125rem;
   --rounded-md: 0.25rem;
