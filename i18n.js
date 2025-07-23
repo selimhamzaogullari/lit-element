@@ -1,6 +1,6 @@
 const messages = {
-  en: {add: 'Add New', firstName: 'First Name'},
-  tr: {add: 'Yeni Ekle', firstName: 'Ad'},
+  en: {employees: 'Employees', addNew: 'Add new'},
+  tr: {employees: 'Çalışanlar', addNew: 'Yeni ekle'},
 };
 
 export function t(key) {
