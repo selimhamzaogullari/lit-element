@@ -18,7 +18,7 @@ export class Navbar extends LitElement {
   `];
 
   render() {
-    return html`<div class="header d-flex items-center justify-center">
+    return html`<div class="header d-flex items-center justify-between">
       <img class="logo" src="./src/assets/images/ing.png" title="ing-logo" />
       <div class="d-flex items-center justify-center gap-x-16">
         <div class="d-flex items-center">
@@ -28,7 +28,7 @@ export class Navbar extends LitElement {
         </div>
         <div class="d-flex items-center">
           <img src="./src/assets/icons/plus-icon.svg" title="plus-icon" />
-          <span class="main-color ml-4 font-semibold">${t('addNew')}</span>
+          <span class="main-color font-semibold">${t('addNew')}</span>
         </div>
         <img class="flag" src="./src/assets/images/tr.png" title="flag-icon" />
       </div>

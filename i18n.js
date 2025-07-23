@@ -1,6 +1,33 @@
 const messages = {
-  en: {employees: 'Employees', addNew: 'Add new'},
-  tr: {employees: 'Çalışanlar', addNew: 'Yeni ekle'},
+  en: {
+    employees: 'Employees',
+    addNew: 'Add new',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    dateEmployement: 'Date of Employement',
+    dateBirth: 'Date of Birth',
+    phone: 'Phone',
+    email: 'Email',
+    department: 'Phone',
+    position: 'Phone',
+    phone: 'Phone',
+    department: 'Department',
+    position: 'Position',
+    actions: 'Actions',
+  },
+  tr: {
+    employees: 'Çalışanlar',
+    addNew: 'Yeni ekle',
+    firstName: 'Ad',
+    lastName: 'Soyad',
+    dateEmployement: 'İşe Alım Tarihi',
+    dateBirth: 'Doğum Tarihi',
+    phone: 'Telefon',
+    email: 'E-posta',
+    department: 'Departman',
+    position: 'Pozisyon',
+    actions: 'Eylemler',
+  },
 };
 
 export function t(key) {
