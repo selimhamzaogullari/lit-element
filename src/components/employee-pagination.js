@@ -1,5 +1,5 @@
 import {LitElement, html, css} from 'lit';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {
   arrowLeftDoubleIcon,
@@ -100,7 +100,7 @@ export class EmployeePagination extends LitElement {
     </div>`;
   }
   static styles = [
-    sharedStyles,
+    globalTheme,
     css`
       .pagination img {
         margin-top: 0.125rem;
@@ -115,15 +115,6 @@ export class EmployeePagination extends LitElement {
       .page-numbers button.active {
         background-color: var(--color-main);
         color: var(--color-white);
-      }
-      button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      button:disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
       }
     `,
   ];

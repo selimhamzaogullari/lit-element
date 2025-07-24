@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {useEmployeeStore} from '../store.js';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import '../components/employee-table.js';
 import '../components/employee-grid.js';
 import '../components/employee-pagination.js';
@@ -108,15 +108,6 @@ export class EmployeeList extends LitElement {
       </modal-content>`;
   }
 
-  static styles = [
-    sharedStyles,
-    css`
-      button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-    `,
-  ];
+  static styles = globalTheme;
 }
 customElements.define('employee-list', EmployeeList);

@@ -1,7 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {t} from '../i18n.js';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
-import sharedResetStyles from '../styles/reset.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {plusIcon} from '../utils/icons.js';
 import {employeesIcon} from '../utils/icons.js';
@@ -38,8 +37,7 @@ export class Navbar extends LitElement {
   }
 
   static styles = [
-    sharedStyles,
-    sharedResetStyles,
+    globalTheme,
     css`
       .header {
         background-color: var(--color-white);

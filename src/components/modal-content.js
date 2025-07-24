@@ -1,5 +1,5 @@
 import {LitElement, html, css} from 'lit';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import {t} from '../i18n.js';
 
 export class ModalContent extends LitElement {
@@ -9,7 +9,7 @@ export class ModalContent extends LitElement {
 
   constructor() {
     super();
-    this.isOpen = true; // Modal is initially closed
+    this.isOpen = false; // Modal is initially closed
   }
 
   show() {
@@ -55,7 +55,7 @@ export class ModalContent extends LitElement {
     </div>`;
   }
   static styles = [
-    sharedStyles,
+    globalTheme,
     css`
       .modal {
         position: fixed;
@@ -77,9 +77,6 @@ export class ModalContent extends LitElement {
         width: fit-content;
         max-width: 70%;
       }
-      .d-none {
-        display: none;
-      }
 
       /* The Close Button */
       .close-button {
@@ -87,8 +84,6 @@ export class ModalContent extends LitElement {
         font-size: var(--text-xl);
         font-weight: var(--font-semibold);
         background-color: transparent;
-        border: none;
-        cursor: pointer;
       }
 
       /* Buttons */
@@ -98,10 +93,8 @@ export class ModalContent extends LitElement {
         border-radius: var(--rounded-md);
         width: 100%;
         padding: var(--spacing-12) var(--spacing-16);
-        cursor: pointer;
       }
       .proceed-button {
-        border: none;
         background-color: var(--color-main);
         color: var(--color-white);
       }

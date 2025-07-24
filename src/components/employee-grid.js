@@ -1,6 +1,6 @@
 import {LitElement, html, css} from 'lit';
 import {t} from '../i18n.js';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {editIcon, deleteIcon} from '../utils/icons.js';
 
@@ -73,7 +73,7 @@ export class EmployeeGrid extends LitElement {
     </div>`;
   }
   static styles = [
-    sharedStyles,
+    globalTheme,
     css`
       .grid {
         display: grid;
@@ -93,15 +93,12 @@ export class EmployeeGrid extends LitElement {
       }
       .grid .box .edit-button,
       .grid .box .delete-button {
-        border: none;
         display: flex;
         align-items: center;
         column-gap: 0.5rem;
         border-radius: var(--rounded-lg);
         color: var(--color-white);
-        font-size: var(--text-bas);
         padding: var(--spacing-8) var(--spacing-12);
-        cursor: pointer;
       }
       .grid .box .edit-button svg,
       .grid .box .delete-button svg {

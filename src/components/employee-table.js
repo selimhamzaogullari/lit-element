@@ -1,7 +1,6 @@
 import {LitElement, html, css} from 'lit';
 import {t} from '../i18n.js';
-import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
-import sharedResetStyles from '../styles/reset.css' with {type: 'css'};
+import {globalTheme} from '../styles/global-style.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {editIcon, deleteIcon} from '../utils/icons.js';
 
@@ -87,8 +86,7 @@ export class EmployeeTable extends LitElement {
     </div>`;
   }
   static styles = [
-    sharedStyles,
-    sharedResetStyles,
+    globalTheme,
     css`
       .table {
         overflow-x: auto;
