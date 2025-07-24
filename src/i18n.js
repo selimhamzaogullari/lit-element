@@ -23,6 +23,7 @@ const messages = {
       'Selected employee record of {{name}} will be deleted',
     proceed: 'Proceed',
     cancel: 'Cancel',
+    searchEmployees: 'Search employee...',
   },
   tr: {
     employees: 'Çalışanlar',
@@ -42,6 +43,7 @@ const messages = {
     deleteEmployeeMessage: 'Seçilen {{name}} çalışan kaydı silinecektir',
     proceed: 'Devam et',
     cancel: 'İptal',
+    searchEmployees: 'Çalışan ara...',
   },
 };
 

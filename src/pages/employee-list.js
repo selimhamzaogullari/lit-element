@@ -5,6 +5,7 @@ import '../components/employee-table.js';
 import '../components/employee-grid.js';
 import '../components/employee-pagination.js';
 import '../components/modal-content.js';
+import '../components/employee-search.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {gridIcon, tableIcon} from '../utils/icons.js';
 import {t} from '../i18n.js';
@@ -18,6 +19,7 @@ export class EmployeeList extends BaseElement {
     currentPage: {type: Number},
     viewType: {type: String}, // 'table' or 'grid'
     selectedEmployee: {type: Object},
+    searchTerm: {type: Object},
   };
 
   constructor() {
@@ -33,11 +35,26 @@ export class EmployeeList extends BaseElement {
       this.totalPages = Math.ceil(this.employees.length / this.pageSize); // Recalculate total pages
     });
     this.selectedEmployee = null; // Currently selected employee for actions
+    this.searchTerm = '';
+  }
+
+  get searchedEmployeed() {
+    return this.employees.filter((employee) =>
+      (employee.first_name + ' ' + employee.last_name)
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase())
+    );
   }
 
   get filteredEmployees() {
     const start = (this.currentPage - 1) * this.pageSize;
-    return this.employees.slice(start, start + this.pageSize);
+    return this.searchedEmployeed.slice(start, start + this.pageSize);
+  }
+
+  searchEmployee(event) {
+    this.searchTerm = event.detail;
+    this.currentPage = 1;
+    this.totalPages = Math.ceil(this.searchedEmployeed.length / this.pageSize);
   }
 
   changePage(event) {
@@ -69,7 +86,10 @@ export class EmployeeList extends BaseElement {
   render() {
     return html`<div class="d-flex item-center justify-between mt-20 mb-16">
         <span class="main-color text-3xl font-semibold">Employee List</span>
-        <div>
+        <div class="d-flex item-center gap-x-4">
+          <employee-search
+            @search-employee="${this.searchEmployee}"
+          ></employee-search>
           <button
             class="main-color"
             @click="${() => (this.viewType = 'table')}"
@@ -89,6 +109,7 @@ export class EmployeeList extends BaseElement {
           ></employee-table>`
         : html`<employee-grid
             .employeeData=${this.filteredEmployees}
+            @delete-employee="${this.showModal}"
           ></employee-grid>`}
       <!-- Pagination -->
       <employee-pagination
