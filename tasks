@@ -1,9 +1,9 @@
 -- Global --
 
-- Change lang when cliked flag icon
 - Button, Input, Box etc. can be converted into a component
 - When you go directly to the relevant page, the page does not load
 - Font-family and other style does not work components
+- Maybe Change lang can transform dropdown
 
 -- Employee List --
 

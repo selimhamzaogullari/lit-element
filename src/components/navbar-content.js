@@ -4,11 +4,17 @@ import {globalTheme} from '../styles/global-style.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {plusIcon} from '../utils/icons.js';
 import {employeesIcon} from '../utils/icons.js';
+import {BaseElement} from '../utils/base-element.js';
+import {useAppStore} from '../store/app-store.js';
 
-export class Navbar extends LitElement {
+export class Navbar extends BaseElement {
   goPage(page = 'home') {
     history.pushState(null, '', page === 'home' ? '/' : '/employees/new');
     window.dispatchEvent(new PopStateEvent('popstate'));
+  }
+
+  changeLanguage() {
+    useAppStore.getState().setLang(this.lang === 'tr' ? 'en' : 'tr');
   }
 
   render() {
@@ -31,7 +37,23 @@ export class Navbar extends LitElement {
           <span class="main-color font-semibold">${t('addNew')}</span>
         </button>
 
-        <img class="flag" src="./src/assets/images/tr.png" title="flag-icon" />
+        <button @click="${this.changeLanguage}">
+          ${this.lang === 'tr'
+            ? html`
+                <img
+                  class="flag"
+                  src="./src/assets/images/en.png"
+                  title="en-logo"
+                />
+              `
+            : html`
+                <img
+                  class="flag"
+                  src="./src/assets/images/tr.png"
+                  title="tr-logo"
+                />
+              `}
+        </button>
       </div>
     </div>`;
   }

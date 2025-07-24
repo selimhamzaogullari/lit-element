@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {useEmployeeStore} from '../store.js';
+import {useEmployeeStore} from '../store/employee-store.js';
 import {globalTheme} from '../styles/global-style.js';
 import '../components/employee-table.js';
 import '../components/employee-grid.js';
@@ -8,8 +8,9 @@ import '../components/modal-content.js';
 import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import {gridIcon, tableIcon} from '../utils/icons.js';
 import {t} from '../i18n.js';
+import {BaseElement} from '../utils/base-element.js';
 
-export class EmployeeList extends LitElement {
+export class EmployeeList extends BaseElement {
   static properties = {
     employees: {type: Array},
     pageSize: {type: Number},

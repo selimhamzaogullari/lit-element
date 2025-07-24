@@ -1,3 +1,5 @@
+import {useAppStore} from './store/app-store';
+
 const messages = {
   en: {
     employees: 'Employees',
@@ -43,14 +45,9 @@ const messages = {
   },
 };
 
-let currentLang = 'en';
-
-export const setLang = (lang) => {
-  currentLang = lang;
-};
-
 export const t = (key, vars = {}) => {
-  const template = messages[currentLang]?.[key] || key;
+  const lang = useAppStore.getState().lang;
+  const template = messages[lang]?.[key] || key;
 
   // Değişkenleri {{name}} → vars.name şeklinde değiştir
   return template.replace(/{{(.*?)}}/g, (_, k) => vars[k.trim()] ?? '');
