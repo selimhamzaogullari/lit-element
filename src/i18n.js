@@ -16,6 +16,11 @@ const messages = {
     actions: 'Actions',
     edit: 'Edit',
     delete: 'Delete',
+    areYouSure: 'Are you sure?',
+    deleteEmployeeMessage:
+      'Selected employee record of {{name}} will be deleted',
+    proceed: 'Proceed',
+    cancel: 'Cancel',
   },
   tr: {
     employees: 'Çalışanlar',
@@ -31,10 +36,22 @@ const messages = {
     actions: 'Eylemler',
     edit: 'Düzenle',
     delete: 'Sil',
+    areYouSure: 'Emin misiniz?',
+    deleteEmployeeMessage: 'Seçilen {{name}} çalışan kaydı silinecektir',
+    proceed: 'Devam et',
+    cancel: 'İptal',
   },
 };
 
-export function t(key) {
-  const lang = document.documentElement.lang || 'en';
-  return messages[lang][key] || key;
-}
+let currentLang = 'en';
+
+export const setLang = (lang) => {
+  currentLang = lang;
+};
+
+export const t = (key, vars = {}) => {
+  const template = messages[currentLang]?.[key] || key;
+
+  // Değişkenleri {{name}} → vars.name şeklinde değiştir
+  return template.replace(/{{(.*?)}}/g, (_, k) => vars[k.trim()] ?? '');
+};

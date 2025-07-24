@@ -6,6 +6,11 @@ export const useEmployeeStore = createStore()(
   persist(
     (set, get) => ({
       employees: mockData,
+      deleteEmployee: (id) => {
+        set({
+          employees: get().employees.filter((employee) => employee.id !== id),
+        });
+      },
     }),
     {
       name: 'employee-storage',
