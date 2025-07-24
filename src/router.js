@@ -6,6 +6,7 @@ export function initRouter() {
 
   router.setRoutes([
     {path: '/', component: 'employee-list'},
-    {path: '/employees/new', component: 'add-employee'},
+    {path: '/employees/new', component: 'employee-add'},
+    {path: '/employees/edit/:id', component: 'employee-edit'},
   ]);
 }

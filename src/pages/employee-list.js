@@ -35,7 +35,7 @@ export class EmployeeList extends LitElement {
   }
 
   render() {
-    return html`<div class="d-flex item-center justify-between mt-16">
+    return html`<div class="d-flex item-center justify-between mt-20 mb-16">
         <span class="main-color text-3xl font-semibold">Employee List</span>
         <div>
           <button

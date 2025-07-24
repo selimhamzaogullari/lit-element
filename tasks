@@ -2,6 +2,7 @@
 
 - Change lang when cliked flag icon
 - Button, Input, Box etc. can be converted into a component
+- When you go directly to the relevant page, the page does not load
 
 -- Employee List --
 

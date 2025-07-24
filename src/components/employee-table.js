@@ -11,9 +11,8 @@ export class EmployeeTable extends LitElement {
   };
 
   render() {
-    console.log(this.employeeData);
     return html` <div class="table">
-      <table class="mt-16">
+      <table>
         <thead>
           <tr>
             <th scope="col">${t('firstName')}</th>
@@ -66,7 +65,7 @@ export class EmployeeTable extends LitElement {
                     class="main-color"
                     @click="${() =>
                       this.dispatchEvent(
-                        new CustomEvent('edit', {detail: employee})
+                        new CustomEvent('edit-employee', {detail: employee})
                       )}"
                   >
                     ${unsafeSVG(editIcon)}
@@ -75,7 +74,7 @@ export class EmployeeTable extends LitElement {
                     class="ml-4 main-color"
                     @click="${() =>
                       this.dispatchEvent(
-                        new CustomEvent('delete', {detail: employee})
+                        new CustomEvent('delete-employee', {detail: employee})
                       )}"
                   >
                     ${unsafeSVG(deleteIcon)}

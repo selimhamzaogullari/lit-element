@@ -51,7 +51,7 @@ export class EmployeeGrid extends LitElement {
                 class="edit-button"
                 @click="${() =>
                   this.dispatchEvent(
-                    new CustomEvent('edit', {detail: employee})
+                    new CustomEvent('edit-employee', {detail: employee})
                   )}"
               >
                 ${unsafeSVG(editIcon)}
@@ -61,7 +61,7 @@ export class EmployeeGrid extends LitElement {
                 class="delete-button ml-4"
                 @click="${() =>
                   this.dispatchEvent(
-                    new CustomEvent('delete', {detail: employee})
+                    new CustomEvent('delete-employee', {detail: employee})
                   )}"
               >
                 ${unsafeSVG(deleteIcon)}
@@ -79,7 +79,6 @@ export class EmployeeGrid extends LitElement {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: var(--spacing-16);
-        padding: 20px;
       }
       .grid .box {
         background-color: var(--color-white);
