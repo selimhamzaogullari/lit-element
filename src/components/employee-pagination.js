@@ -1,6 +1,12 @@
 import {LitElement, html, css} from 'lit';
-import {t} from '../i18n.js';
 import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
+import {
+  arrowLeftDoubleIcon,
+  arrowLeftIcon,
+  arrowRightDoubleIcon,
+  arrowRightIcon,
+} from '../utils/icons.js';
 
 export class EmployeePagination extends LitElement {
   static properties = {
@@ -41,63 +47,57 @@ export class EmployeePagination extends LitElement {
   }
 
   changePage(newPage) {
-    if (
-      newPage > 0 &&
-      newPage <= this.totalPages
-    ) {
+    if (newPage > 0 && newPage <= this.totalPages) {
       this.getPaginationPages(this.currentPage);
-      this.dispatchEvent(new CustomEvent('page-changed', {detail: newPage}))
+      this.dispatchEvent(new CustomEvent('page-changed', {detail: newPage}));
     }
   }
 
   render() {
-    this.getPaginationPages(this.currentPage)
+    this.getPaginationPages(this.currentPage);
     return html`<div class="w-full d-flex items-center justify-center mt-16">
-          <div class="pagination d-flex items-center justify-center gap-x-4">
-            <button
-              @click="${() => this.changePage(1)}"
-              ?disabled="${this.currentPage === 1}"
-            >
-              <img
-                src="./src/assets/icons/arrow-left-double-icon.svg"
-                alt="Previous Double"
-              />
-            </button>
-            <button
-              @click="${() => this.changePage(this.currentPage - 1)}"
-              ?disabled="${this.currentPage === 1}"
-            >
-              <img src="./src/assets/icons/arrow-left-icon.svg" alt="Previous" />
-            </button>
-            <div class="page-numbers">
-              ${this.visiblePages.map(
-                (page) => html`<button
-                  class="${this.currentPage === page ? 'active' : ''}"
-                  @click="${() => this.changePage(page)}"
-                >
-                  ${page}
-                </button>`
-              )}
-            </div>
-            <button
-              @click="${() => this.changePage(this.currentPage + 1)}"
-              ?disabled="${this.currentPage ===
-              this.totalPages}"
-            >
-              <img src="./src/assets/icons/arrow-right-icon.svg" alt="Next" />
-            </button>
-            <button
-              @click="${() => this.changePage(this.totalPages)}"
-              ?disabled="${this.currentPage ===
-              this.totalPages}"
-            >
-              <img
-                src="./src/assets/icons/arrow-right-double-icon.svg"
-                alt="Next Double"
-              />
-            </button>
-          </div>
-        </div>`;
+      <div class="pagination d-flex items-center justify-center gap-x-4">
+        <button
+          class="main-color"
+          @click="${() => this.changePage(1)}"
+          ?disabled="${this.currentPage === 1}"
+        >
+          ${unsafeSVG(arrowLeftDoubleIcon)}
+        </button>
+        <button
+          class="main-color"
+          @click="${() => this.changePage(this.currentPage - 1)}"
+          ?disabled="${this.currentPage === 1}"
+        >
+          ${unsafeSVG(arrowLeftIcon)}
+        </button>
+        <div class="page-numbers">
+          ${this.visiblePages.map(
+            (page) =>
+              html`<button
+                class="${this.currentPage === page ? 'active' : ''}"
+                @click="${() => this.changePage(page)}"
+              >
+                ${page}
+              </button>`
+          )}
+        </div>
+        <button
+          class="main-color"
+          @click="${() => this.changePage(this.currentPage + 1)}"
+          ?disabled="${this.currentPage === this.totalPages}"
+        >
+          ${unsafeSVG(arrowRightIcon)}
+        </button>
+        <button
+          class="main-color"
+          @click="${() => this.changePage(this.totalPages)}"
+          ?disabled="${this.currentPage === this.totalPages}"
+        >
+          ${unsafeSVG(arrowRightDoubleIcon)}
+        </button>
+      </div>
+    </div>`;
   }
   static styles = [
     sharedStyles,

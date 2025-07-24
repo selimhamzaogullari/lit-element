@@ -1,10 +1,11 @@
 import {LitElement, css, html} from 'lit';
-import {t} from '../i18n.js';
 import {useEmployeeStore} from '../store.js';
 import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
 import '../components/employee-table.js';
 import '../components/employee-grid.js';
 import '../components/employee-pagination.js';
+import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
+import {gridIcon, tableIcon} from '../utils/icons.js';
 
 export class EmployeeList extends LitElement {
   static properties = {
@@ -21,7 +22,7 @@ export class EmployeeList extends LitElement {
     this.pageSize = 10; // Number of employees per page
     this.currentPage = 1; // Current page number
     this.totalPages = Math.ceil(this.employees.length / this.pageSize); // Total number of pages
-    this.viewType = 'table'; // Default view type
+    this.viewType = 'grid'; // Default view type
   }
 
   get filteredEmployees() {
@@ -37,15 +38,14 @@ export class EmployeeList extends LitElement {
     return html`<div class="d-flex item-center justify-between mt-16">
         <span class="main-color text-3xl font-semibold">Employee List</span>
         <div>
-          <button @click="${() => (this.viewType = 'table')}">
-            <img src="./src/assets/icons/table-icon.svg" title="table-icon" />
+          <button
+            class="main-color"
+            @click="${() => (this.viewType = 'table')}"
+          >
+            ${unsafeSVG(tableIcon)}
           </button>
-          <button @click="${() => (this.viewType = 'grid')}">
-            <img
-              class="ml-8"
-              src="./src/assets/icons/grid-icon.svg"
-              title="grid-icon"
-            />
+          <button class="main-color" @click="${() => (this.viewType = 'grid')}">
+            ${unsafeSVG(gridIcon)}
           </button>
         </div>
       </div>

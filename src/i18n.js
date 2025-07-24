@@ -14,6 +14,8 @@ const messages = {
     department: 'Department',
     position: 'Position',
     actions: 'Actions',
+    edit: 'Edit',
+    delete: 'Delete',
   },
   tr: {
     employees: 'Çalışanlar',
@@ -27,6 +29,8 @@ const messages = {
     department: 'Departman',
     position: 'Pozisyon',
     actions: 'Eylemler',
+    edit: 'Düzenle',
+    delete: 'Sil',
   },
 };
 

@@ -1,5 +1,9 @@
 import {LitElement, html, css} from 'lit';
 import {t} from '../i18n.js';
+import sharedStyles from '../styles/superclasses.css' with {type: 'css'};
+import sharedResetStyles from '../styles/reset.css' with {type: 'css'};
+import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
+import {editIcon, deleteIcon} from '../utils/icons.js';
 
 export class EmployeeTable extends LitElement {
   static properties = {
@@ -25,42 +29,67 @@ export class EmployeeTable extends LitElement {
         </thead>
         <tbody>
           ${this.employeeData.map(
-            (employee) => html`<tr>
-              <td data-label="First Name" title="${employee.first_name}">
-                ${employee.first_name}
-              </td>
-              <td data-label="Last Name" title="${employee.last_name}">
-                ${employee.last_name}
-              </td>
-              <td
-                data-label="Date of Employement"
-                title="${employee.date_of_employment}"
-              >
-                ${employee.date_of_employment}
-              </td>
-              <td data-label="Date of Birth" title="${employee.date_of_birth}">
-                ${employee.date_of_birth}
-              </td>
-              <td data-label="Phone" title="${employee.phone}">
-                ${employee.phone}
-              </td>
-              <td data-label="Email" title="${employee.email}">
-                ${employee.email}
-              </td>
-              <td data-label="Department" title="${employee.department}">
-                ${employee.department}
-              </td>
-              <td data-label="Position" title="${employee.position}">
-                ${employee.position}
-              </td>
-              <td data-label="Actions">Actions</td>
-            </tr>`
+            (employee) =>
+              html`<tr>
+                <td data-label="First Name" title="${employee.first_name}">
+                  ${employee.first_name}
+                </td>
+                <td data-label="Last Name" title="${employee.last_name}">
+                  ${employee.last_name}
+                </td>
+                <td
+                  data-label="Date of Employement"
+                  title="${employee.date_of_employment}"
+                >
+                  ${employee.date_of_employment}
+                </td>
+                <td
+                  data-label="Date of Birth"
+                  title="${employee.date_of_birth}"
+                >
+                  ${employee.date_of_birth}
+                </td>
+                <td data-label="Phone" title="${employee.phone}">
+                  ${employee.phone}
+                </td>
+                <td data-label="Email" title="${employee.email}">
+                  ${employee.email}
+                </td>
+                <td data-label="Department" title="${employee.department}">
+                  ${employee.department}
+                </td>
+                <td data-label="Position" title="${employee.position}">
+                  ${employee.position}
+                </td>
+                <td data-label="Actions">
+                  <button
+                    class="main-color"
+                    @click="${() =>
+                      this.dispatchEvent(
+                        new CustomEvent('edit', {detail: employee})
+                      )}"
+                  >
+                    ${unsafeSVG(editIcon)}
+                  </button>
+                  <button
+                    class="ml-4 main-color"
+                    @click="${() =>
+                      this.dispatchEvent(
+                        new CustomEvent('delete', {detail: employee})
+                      )}"
+                  >
+                    ${unsafeSVG(deleteIcon)}
+                  </button>
+                </td>
+              </tr>`
           )}
         </tbody>
       </table>
     </div>`;
   }
   static styles = [
+    sharedStyles,
+    sharedResetStyles,
     css`
       .table {
         overflow-x: auto;
@@ -87,6 +116,9 @@ export class EmployeeTable extends LitElement {
       }
       table th {
         color: var(--color-main);
+      }
+      table td svg {
+        width: 1rem;
       }
     `,
   ];
