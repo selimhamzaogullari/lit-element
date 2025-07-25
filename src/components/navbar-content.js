@@ -19,7 +19,10 @@ export class Navbar extends BaseElement {
 
   render() {
     return html`<div class="header d-flex items-center justify-between">
-      <img class="logo" src="./src/assets/images/ing.png" title="ing-logo" />
+      <div class="d-flex items-center">
+        <img class="logo" src="./src/assets/images/ing.png" title="ing-logo" />
+        <span class="text-lg font-semibold ml-12">ING</span>
+      </div>
       <div class="d-flex items-center justify-center gap-x-16">
         <button
           class="main-color d-flex items-center gap-x-4"
@@ -42,14 +45,14 @@ export class Navbar extends BaseElement {
             ? html`
                 <img
                   class="flag"
-                  src="./src/assets/images/en.png"
+                  src="/src/assets/images/en.png"
                   title="en-logo"
                 />
               `
             : html`
                 <img
                   class="flag"
-                  src="./src/assets/images/tr.png"
+                  src="/src/assets/images/tr.png"
                   title="tr-logo"
                 />
               `}

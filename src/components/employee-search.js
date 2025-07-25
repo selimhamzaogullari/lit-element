@@ -44,9 +44,6 @@ class EmployeeSearch extends BaseElement {
         color: var(--color-main);
         opacity: 0.7;
       }
-      input:focus {
-        outline: none;
-      }
     `,
   ];
 }

@@ -85,7 +85,9 @@ export class EmployeeList extends BaseElement {
 
   render() {
     return html`<div class="d-flex item-center justify-between mt-20 mb-16">
-        <span class="main-color text-3xl font-semibold">Employee List</span>
+        <span class="main-color text-3xl font-semibold"
+          >${t('employeeList')}</span
+        >
         <div class="d-flex item-center gap-x-4">
           <employee-search
             @search-employee="${this.searchEmployee}"

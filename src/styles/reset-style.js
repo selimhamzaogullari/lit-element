@@ -133,4 +133,7 @@ export const resetStyles = css`
     padding: 0;
     font: inherit;
   }
+  input:focus {
+    outline: none;
+  }
 `;

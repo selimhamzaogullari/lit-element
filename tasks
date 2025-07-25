@@ -1,11 +1,8 @@
 -- Global --
 
+- Check employee exist when add and edit employee
 - Button, Input, Box etc. can be converted into a component
 - When you go directly to the relevant page, the page does not load
 - Font-family and other style does not work components
 - Check responsive design
-- Maybe Change lang can transform dropdown
-
--- Employee List --
-
-- Searchable
+- Input controls can be increased

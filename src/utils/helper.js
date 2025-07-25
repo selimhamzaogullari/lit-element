@@ -10,3 +10,7 @@ export function debounce(fn, wait) {
     }, wait);
   };
 }
+
+export function randomId() {
+  return '_' + Math.random().toString(36).slice(2, 9);
+}
