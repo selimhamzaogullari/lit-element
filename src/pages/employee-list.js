@@ -98,12 +98,15 @@ export class EmployeeList extends BaseElement {
             @search-employee="${this.searchEmployee}"
           ></employee-search>
           <button
-            class="main-color"
+            class="show-table-view-icon main-color"
             @click="${() => (this.viewType = 'table')}"
           >
             ${unsafeSVG(tableIcon)}
           </button>
-          <button class="main-color" @click="${() => (this.viewType = 'grid')}">
+          <button
+            class="show-grid-view-icon main-color"
+            @click="${() => (this.viewType = 'grid')}"
+          >
             ${unsafeSVG(gridIcon)}
           </button>
         </div>

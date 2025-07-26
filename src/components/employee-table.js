@@ -61,7 +61,7 @@ export class EmployeeTable extends LitElement {
                 </td>
                 <td data-label="Actions">
                   <button
-                    class="main-color"
+                    class="edit-button main-color"
                     @click="${() =>
                       this.dispatchEvent(
                         new CustomEvent('edit-employee', {detail: employee.id})
@@ -70,7 +70,7 @@ export class EmployeeTable extends LitElement {
                     ${unsafeSVG(editIcon)}
                   </button>
                   <button
-                    class="ml-4 main-color"
+                    class="delete-button ml-4 main-color"
                     @click="${() =>
                       this.dispatchEvent(
                         new CustomEvent('delete-employee', {detail: employee})

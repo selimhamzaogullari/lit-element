@@ -25,7 +25,7 @@ export class Navbar extends BaseElement {
       </div>
       <div class="d-flex items-center justify-center gap-x-16">
         <button
-          class="main-color d-flex items-center gap-x-4"
+          class="employee-page-btn main-color d-flex items-center gap-x-4"
           @click="${() => this.goPage()}"
         >
           ${unsafeSVG(employeesIcon)}
@@ -33,14 +33,14 @@ export class Navbar extends BaseElement {
         </button>
 
         <button
-          class="main-color d-flex items-center"
+          class="new-employee-btn main-color d-flex items-center"
           @click="${() => this.goPage('form')}"
         >
           ${unsafeSVG(plusIcon)}
           <span class="main-color font-semibold">${t('addNew')}</span>
         </button>
 
-        <button @click="${this.changeLanguage}">
+        <button class="lang-btn" @click="${this.changeLanguage}">
           ${this.lang === 'tr'
             ? html`
                 <img
