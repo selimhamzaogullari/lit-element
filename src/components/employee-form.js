@@ -7,9 +7,12 @@ import {useEmployeeStore} from '../store/employee-store';
 class EmployeeForm extends BaseElement {
   static properties = {
     errors: {type: Object},
+    employee: {type: Object},
+    form: {type: Object},
   };
   constructor() {
     super();
+    this.employee = null;
     this.fields = [
       {name: 'firstName', value: 'first_name', type: 'text'},
       {name: 'lastName', value: 'last_name', type: 'text'},
@@ -52,6 +55,19 @@ class EmployeeForm extends BaseElement {
       min: '2018-01-01',
       max: new Date().toISOString().split('T')[0],
     };
+  }
+
+  // Update Lifecycle
+  updated(changedProps) {
+    if (changedProps.has('employee') && this.employee) {
+      this.form = {...this.employee};
+      this.form.date_of_birth = new Date(this.form.date_of_birth)
+        .toISOString()
+        .split('T')[0];
+      this.form.date_of_employment = new Date(this.form.date_of_employment)
+        .toISOString()
+        .split('T')[0];
+    }
   }
 
   checkFields(dataType, value) {
@@ -120,20 +136,8 @@ class EmployeeForm extends BaseElement {
       }
     }
     // Convert date format (yyyy-mm-dd -> d-m-yyyy)
-    if (!this.checkEmptyFields) {
-      this.form.date_of_birth = new Date(
-        this.form.date_of_birth
-      ).toLocaleDateString('en-US');
-      this.form.date_of_employment = new Date(
-        this.form.date_of_employment
-      ).toLocaleDateString('en-US');
-
-      useEmployeeStore.getState().addEmployee(this.form); // Add new employee to store
-
-      setTimeout(() => {
-        this.goHome();
-      }, 500);
-    }
+    if (!this.checkEmptyFields)
+      this.renderRoot.querySelector('modal-content').show();
   }
 
   goHome() {
@@ -141,78 +145,132 @@ class EmployeeForm extends BaseElement {
     window.dispatchEvent(new PopStateEvent('popstate'));
   }
 
+  proceed() {
+    this.form.date_of_birth = new Date(
+      this.form.date_of_birth
+    ).toLocaleDateString('en-US');
+    this.form.date_of_employment = new Date(
+      this.form.date_of_employment
+    ).toLocaleDateString('en-US');
+    let response;
+    if (!this.employee) {
+      // New employee
+      response = useEmployeeStore.getState().addEmployee(this.form);
+    } else {
+      // Update Employee
+      response = useEmployeeStore.getState().editEmployee(this.form);
+      console.log(response);
+    }
+
+    setTimeout(() => {
+      this.goHome();
+    }, 500);
+  }
+
   render() {
     return html`
-      <form class="form-content" @submit=${(e) => e.preventDefault()}>
-        <div class="form-content">
-          ${this.fields.map(
-            (field) =>
-              html` <div class="input-content">
-                ${field.type === 'text'
-                  ? html` <label .for=${field.value}>${t(field.name)}:</label>
-                      <input
-                        type="text"
-                        id=${field.value}
-                        data-type=${field.value}
-                        .value=${this.form[field.value]}
-                        @input="${this.handleInput}"
-                      />
-                      ${this.errors[field.value] !== ''
-                        ? html`<small class="error"
-                            >* ${this.errors[field.value]}</small
-                          >`
-                        : null}`
-                  : field.type === 'date'
-                    ? html` <label .for=${field.value}>${t(field.name)}</label>
+      <div class="employee-form">
+        ${this.employee
+          ? html`<span class="employee-info">
+              ${t('editedEmployeeInfo', {
+                name: this.employee.first_name + ' ' + this.employee.last_name,
+              })}</span
+            >`
+          : null}
+        <form class="form-content" @submit=${(e) => e.preventDefault()}>
+          <div class="form-content">
+            ${this.fields.map(
+              (field) =>
+                html` <div class="input-content">
+                  ${field.type === 'text'
+                    ? html` <label .for=${field.value}>${t(field.name)}:</label>
                         <input
-                          type="date"
-                          data-type=${field.value}
+                          type="text"
                           id=${field.value}
-                          name=${field.value}
-                          min=${this.dateRange.min}
-                          .max=${this.dateRange.max}
+                          data-type=${field.value}
                           .value=${this.form[field.value]}
-                          @change="${this.handleInput}"
+                          @input="${this.handleInput}"
                         />
                         ${this.errors[field.value] !== ''
                           ? html`<small class="error"
                               >* ${this.errors[field.value]}</small
                             >`
                           : null}`
-                    : html`<label .for=${field.value}>${t(field.name)}</label>
-                        <select
-                          .name=${field.value}
-                          .id=${field.value}
-                          .value=${this.form[field.value]}
-                          @change="${(e) =>
-                            (this.form[field.value] = e.target.value)}"
-                        >
-                          ${field.options.map(
-                            (option) =>
-                              html` <option value=${option}>${option}</option>`
-                          )}
-                        </select>`}
-              </div>`
-          )}
-        </div>
-        <div class="d-flex justify-center items-center w-full gap-x-20 mt-20">
-          <button
-            class="save-button"
-            .disabled="${this.checkEmptyFields}"
-            @click="${this.handleSubmit}"
-          >
-            <span>${t('save')}</span>
-          </button>
-          <button class="cancel-button" @click="${this.goHome}">
-            <span>${t('cancel')}</span>
-          </button>
-        </div>
-      </form>
+                    : field.type === 'date'
+                      ? html` <label .for=${field.value}
+                            >${t(field.name)}</label
+                          >
+                          <input
+                            type="date"
+                            data-type=${field.value}
+                            id=${field.value}
+                            name=${field.value}
+                            min=${this.dateRange.min}
+                            .max=${this.dateRange.max}
+                            .value=${this.form[field.value]}
+                            @change="${this.handleInput}"
+                          />
+                          ${this.errors[field.value] !== ''
+                            ? html`<small class="error"
+                                >* ${this.errors[field.value]}</small
+                              >`
+                            : null}`
+                      : html`<label .for=${field.value}>${t(field.name)}</label>
+                          <select
+                            .name=${field.value}
+                            .id=${field.value}
+                            .value=${this.form[field.value]}
+                            @change="${(e) =>
+                              (this.form[field.value] = e.target.value)}"
+                          >
+                            ${field.options.map(
+                              (option) =>
+                                html` <option value=${option}>
+                                  ${option}
+                                </option>`
+                            )}
+                          </select>`}
+                </div>`
+            )}
+          </div>
+          <div class="d-flex justify-center items-center w-full gap-x-20 mt-20">
+            <button
+              class="save-button"
+              .disabled="${this.checkEmptyFields}"
+              @click="${this.handleSubmit}"
+            >
+              <span>${t('save')}</span>
+            </button>
+            <button class="cancel-button" @click="${this.goHome}">
+              <span>${t('cancel')}</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      <modal-content @proceed-modal="${this.proceed}">
+        ${this.employee
+          ? t('editEmployeeMessage', {
+              name: this.employee?.first_name + ' ' + this.employee?.last_name,
+            })
+          : t('addEmployeeMessage')}
+      </modal-content>
     `;
   }
   static styles = [
     globalTheme,
     css`
+      .employee-form {
+        padding: var(--spacing-48);
+        border-radius: var(--rounded-md);
+        background-color: var(--color-white);
+        position: absolute;
+      }
+      span.employee-info {
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        font-weight: var(--font-semibold);
+      }
       .form-content {
         display: flex;
         align-items: center;

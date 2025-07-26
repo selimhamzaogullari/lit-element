@@ -51,7 +51,7 @@ export class EmployeeGrid extends LitElement {
                 class="edit-button"
                 @click="${() =>
                   this.dispatchEvent(
-                    new CustomEvent('edit-employee', {detail: employee})
+                    new CustomEvent('edit-employee', {detail: employee.id})
                   )}"
               >
                 ${unsafeSVG(editIcon)}

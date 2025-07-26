@@ -68,7 +68,6 @@ export class EmployeeList extends BaseElement {
 
   hideModal() {
     this.selectedEmployee = null; // Clear selected employee
-    this.renderRoot.querySelector('modal-content').hide(); // Hide confirmation modal
   }
 
   deleteEmployee(event) {
@@ -76,6 +75,12 @@ export class EmployeeList extends BaseElement {
       useEmployeeStore.getState().deleteEmployee(this.selectedEmployee.id);
       this.renderRoot.querySelector('modal-content').hide(); // Hide modal after deletion
     }
+  }
+
+  goEditPage(event) {
+    const id = event.detail;
+    history.pushState(null, '', `/employees/edit/${id}`);
+    window.dispatchEvent(new PopStateEvent('popstate'));
   }
 
   disconnectedCallback() {
@@ -108,10 +113,12 @@ export class EmployeeList extends BaseElement {
         ? html`<employee-table
             .employeeData=${this.filteredEmployees}
             @delete-employee="${this.showModal}"
+            @edit-employee="${this.goEditPage}"
           ></employee-table>`
         : html`<employee-grid
             .employeeData=${this.filteredEmployees}
             @delete-employee="${this.showModal}"
+            @edit-employee="${this.goEditPage}"
           ></employee-grid>`}
       <!-- Pagination -->
       <employee-pagination

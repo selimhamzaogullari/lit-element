@@ -18,6 +18,8 @@ const messages = {
     areYouSure: 'Are you sure?',
     deleteEmployeeMessage:
       'Selected employee record of {{name}} will be deleted',
+    editEmployeeMessage: 'Selected employee record of {{name}} will be edited',
+    addEmployeeMessage: 'You are adding a new employee',
     proceed: 'Proceed',
     cancel: 'Cancel',
     searchEmployees: 'Search employee...',
@@ -27,6 +29,9 @@ const messages = {
     requireField: '{{field}} is required!',
     invalidFormat: 'Invalid {{field}} format!',
     dateRangeError: '{{field}} date must be between {{min}} and {{max}}',
+    editEmployee: 'Edit Employee',
+    employeeNotFound: 'Employee not found!',
+    editedEmployeeInfo: 'You are editing {{name}}',
   },
   tr: {
     employees: 'Çalışanlar',
@@ -44,16 +49,21 @@ const messages = {
     delete: 'Sil',
     areYouSure: 'Emin misiniz?',
     deleteEmployeeMessage: 'Seçilen {{name}} çalışan kaydı silinecektir',
+    editEmployeeMessage: 'Seçilen {{name}} çalışan kaydı güncellenecektir',
+    addEmployeeMessage: 'Yeni bir çalışan ekliyorsunuz',
     proceed: 'Devam et',
     cancel: 'İptal',
     searchEmployees: 'Çalışan ara...',
     employeeList: 'Çalışan Listesi',
     addEmployee: 'Çalışan Ekle',
     save: 'Kaydet',
-    requireField: '${field} alanı gerekli!',
+    requireField: '{{field}} alanı gerekli!',
     invalidFormat: '{{field}} geçerisiz formatta!',
     dateRangeError:
       '{{field}} tarihi {{min}} ile {{max}} tairhleri arasında olmalı',
+    editEmployee: 'Çalışanı Düzenle',
+    employeeNotFound: 'Çalışan bulunamadı!',
+    editedEmployeeInfo: '{{name}} çalışanını düzenliyorsunuz',
   },
 };
 

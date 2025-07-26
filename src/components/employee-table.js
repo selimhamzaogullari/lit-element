@@ -64,7 +64,7 @@ export class EmployeeTable extends LitElement {
                     class="main-color"
                     @click="${() =>
                       this.dispatchEvent(
-                        new CustomEvent('edit-employee', {detail: employee})
+                        new CustomEvent('edit-employee', {detail: employee.id})
                       )}"
                   >
                     ${unsafeSVG(editIcon)}

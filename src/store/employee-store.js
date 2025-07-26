@@ -12,11 +12,35 @@ export const useEmployeeStore = createStore()(
           employees: get().employees.filter((employee) => employee.id !== id),
         });
       },
-      addEmployee: (employee) => {
-        const newEmployee = {id: randomId(), ...employee};
+      addEmployee: (newEmployee) => {
+        const existEmployee = get().employees.find(
+          (employee) => employee.email === newEmployee.email
+        );
+        const _newEmployee = {id: randomId(), ...newEmployee};
         set({
-          employees: [newEmployee, ...get().employees],
+          employees: existEmployee
+            ? get().employees
+            : [_newEmployee, ...get().employees],
         });
+        return !existEmployee;
+      },
+      editEmployee: (editedEmployee) => {
+        const existEmployee = get().employees.find(
+          (employee) =>
+            employee.email === editedEmployee.email &&
+            employee.id !== editedEmployee.id
+        );
+        set({
+          employees: existEmployee
+            ? get().employees
+            : get().employees.map((employee) =>
+                employee.id === editedEmployee.id ? editedEmployee : employee
+              ),
+        });
+        return !existEmployee;
+      },
+      getEmployee: (id) => {
+        return get().employees.find((employee) => employee.id == id);
       },
     }),
     {

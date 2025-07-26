@@ -18,6 +18,7 @@ export class ModalContent extends LitElement {
 
   hide() {
     this.isOpen = false; // Close the modal
+    this.dispatchEvent(new CustomEvent('cancel-modal'));
   }
 
   render() {
@@ -43,11 +44,7 @@ export class ModalContent extends LitElement {
           >
             ${t('proceed')}
           </button>
-          <button
-            class="cancel-button"
-            @click="${() =>
-              this.dispatchEvent(new CustomEvent('cancel-modal'))}"
-          >
+          <button class="cancel-button" @click="${this.hide}">
             ${t('cancel')}
           </button>
         </div>
@@ -76,6 +73,7 @@ export class ModalContent extends LitElement {
         padding: 20px;
         width: fit-content;
         max-width: 70%;
+        min-width: 400px;
       }
 
       /* The Close Button */

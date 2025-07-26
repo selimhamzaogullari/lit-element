@@ -5,6 +5,9 @@ export const superClassesStyle = css`
   .main-color {
     color: var(--color-main);
   }
+  .red-color {
+    color: var(--color-red);
+  }
   .d-flex {
     display: flex;
   }
