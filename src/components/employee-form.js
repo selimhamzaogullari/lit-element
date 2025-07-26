@@ -177,7 +177,7 @@ class EmployeeForm extends BaseElement {
               })}</span
             >`
           : null}
-        <form class="form-content" @submit=${(e) => e.preventDefault()}>
+        <form @submit=${(e) => e.preventDefault()}>
           <div class="form-content">
             ${this.fields.map(
               (field) =>
@@ -233,7 +233,9 @@ class EmployeeForm extends BaseElement {
                 </div>`
             )}
           </div>
-          <div class="d-flex justify-center items-center w-full gap-x-20 mt-20">
+          <div
+            class="button-content d-flex justify-center items-center w-full gap-x-20 mt-20"
+          >
             <button
               class="save-button"
               .disabled="${this.checkEmptyFields}"
@@ -263,7 +265,7 @@ class EmployeeForm extends BaseElement {
         padding: var(--spacing-48);
         border-radius: var(--rounded-md);
         background-color: var(--color-white);
-        position: absolute;
+        position: relative;
       }
       span.employee-info {
         position: absolute;
@@ -317,6 +319,20 @@ class EmployeeForm extends BaseElement {
       .cancel-button {
         border: 2px solid var(--color-secondary);
         color: var(--color-secondary);
+      }
+      @media (max-width: 800px) {
+        .input-content {
+          width: 48%;
+        }
+        @media (max-width: 550px) {
+          .input-content {
+            width: 100%;
+          }
+          .button-content {
+            flex-wrap: wrap;
+            row-gap: var(--spacing-16);
+          }
+        }
       }
     `,
   ];

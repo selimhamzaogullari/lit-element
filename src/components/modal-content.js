@@ -33,7 +33,7 @@ export class ModalContent extends LitElement {
             <span class="close">&times;</span>
           </button>
         </div>
-        <div>
+        <div class="content">
           <slot></slot>
         </div>
         <div class="mt-32">
@@ -66,6 +66,10 @@ export class ModalContent extends LitElement {
         background-color: rgba(0, 0, 0, 0.4);
       }
 
+      .content {
+        line-height: 23px;
+      }
+
       /* Modal Content */
       .modal-content {
         background-color: var(--color-white);
@@ -73,7 +77,6 @@ export class ModalContent extends LitElement {
         padding: 20px;
         width: fit-content;
         max-width: 70%;
-        min-width: 400px;
       }
 
       /* The Close Button */

@@ -20,6 +20,10 @@ export const globalTheme = [
       padding: 15px 30px;
     }
 
+    input {
+      box-sizing: border-box;
+    }
+
     button {
       background-color: transparent;
       border: none;

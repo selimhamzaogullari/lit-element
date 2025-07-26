@@ -89,26 +89,30 @@ export class EmployeeList extends BaseElement {
   }
 
   render() {
-    return html`<div class="d-flex item-center justify-between mt-20 mb-16">
+    return html`<div
+        class="employee-list-content d-flex item-center justify-between mt-20 mb-16"
+      >
         <span class="main-color text-3xl font-semibold"
           >${t('employeeList')}</span
         >
-        <div class="d-flex item-center gap-x-4">
+        <div class="search-list-content d-flex item-center gap-x-4">
           <employee-search
             @search-employee="${this.searchEmployee}"
           ></employee-search>
-          <button
-            class="show-table-view-icon main-color"
-            @click="${() => (this.viewType = 'table')}"
-          >
-            ${unsafeSVG(tableIcon)}
-          </button>
-          <button
-            class="show-grid-view-icon main-color"
-            @click="${() => (this.viewType = 'grid')}"
-          >
-            ${unsafeSVG(gridIcon)}
-          </button>
+          <div>
+            <button
+              class="show-table-view-icon main-color"
+              @click="${() => (this.viewType = 'table')}"
+            >
+              ${unsafeSVG(tableIcon)}
+            </button>
+            <button
+              class="show-grid-view-icon main-color"
+              @click="${() => (this.viewType = 'grid')}"
+            >
+              ${unsafeSVG(gridIcon)}
+            </button>
+          </div>
         </div>
       </div>
       <!-- Table View -->
@@ -142,6 +146,20 @@ export class EmployeeList extends BaseElement {
       </modal-content>`;
   }
 
-  static styles = globalTheme;
+  static styles = [
+    globalTheme,
+    css`
+      @media (max-width: 600px) {
+        .employee-list-content {
+          flex-direction: column;
+        }
+        .search-list-content {
+          width: 100%;
+          justify-content: space-between;
+          margin-top: var(--spacing-16);
+        }
+      }
+    `,
+  ];
 }
 customElements.define('employee-list', EmployeeList);
